@@ -36,3 +36,22 @@
     transform: rotate(360deg);
   }
 }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.buttonClk {
+  background-color: aqua;
+  color: black;
+}
+
+.buttonReset {
+  background-color: red;
+  color: white;
+}
