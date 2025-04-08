@@ -1,0 +1,5 @@
+How to set page design? I have tried to give row column but still all the text and buttons are on the left of the page.
+
+Even though if we design using multiple JS files, do we need to call all the JS to the App.js file?
+
+Use state..?
