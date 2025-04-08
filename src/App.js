@@ -1,5 +1,8 @@
 import './App.css';
 import ButtonCount from './ButtonCount';
+import ButtonRedirect from './ButtonRedirect';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import WelcomePage from './WelcomePage';
 
 function Greetings(props)
 {
@@ -10,8 +13,16 @@ function App()
 {
   return (
     <div>
-        <Greetings name="Team" />
-        <ButtonCount />
+        <BrowserRouter>
+          <Greetings name="Team" />
+          <ButtonCount />
+          <ButtonRedirect />
+
+          <Routes>
+            <Route path="/WelcomePage" element={<WelcomePage />} />
+          </Routes>
+        </BrowserRouter>
+       
     </div>
   );
 }

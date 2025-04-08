@@ -7,14 +7,14 @@ function ButtonCount()
   return (
     <div>
         <h3>You clicked the button {count} times</h3>
-        <div class = "row">
-            <div class = "col-6">
-            <button class='buttonClk' onClick={() => setCount(count + 1)}>
+        <div className = "row">
+            <div className = "col-6">
+            <button className = 'buttonClk' onClick={() => setCount(count + 1)}>
                 Click me
             </button>
             </div>
-            <div class = "col-6">
-                <button class='buttonReset' onClick={() => setCount(0)}>
+            <div className = "col-6">
+                <button className ='buttonReset' onClick={() => setCount(0)}>
                     Reset
                 </button>
             </div>
