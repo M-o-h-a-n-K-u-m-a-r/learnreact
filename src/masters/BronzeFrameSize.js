@@ -1,108 +1,48 @@
-import React, { useState, useEffect } from 'react';
-import DataTable from 'react-data-table-component';
+import React, { useState, useEffect } from 'react'; // Components (Function Components), useState, useEffect
+// - Functional component is used (`BronzeFrameSizes`).
+// - `useState` and `useEffect` hooks are used for managing local state and simulating data loading.
+
+import DataTable from 'react-data-table-component'; // Lists and Keys (used in table rows with `row.id`)
 import { Button, Modal, Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FaEdit, FaTrashAlt, FaTimesCircle } from 'react-icons/fa';
-import AppNavbar from '../components/AppNavbar';
-import LoadingSpinner from '../components/LoadingSpinner';
-import bronzeData from '../JSON/BFS.json'; // Your JSON data file
+import AppNavbar from '../components/AppNavbar'; // Components
+import LoadingSpinner from '../components/LoadingSpinner'; // Components
+import bronzeData from '../JSON/BFS.json'; // Working with APIs (local JSON for mock data loading)
 
-function BronzeFrameSizes() {
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
+function BronzeFrameSizes() { // JSX Syntax, Function Components
+  const [loading, setLoading] = useState(true); // useState for managing loading
+  const [data, setData] = useState([]); // useState for managing table data
   const [showModal, setShowModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
-  const [bronzeFrameOptions, setBronzeFrameOptions] = useState([]); // Dropdown options
-  const [formData, setFormData] = useState({ name: '', size: '' });
+  const [bronzeFrameOptions, setBronzeFrameOptions] = useState([]); // useState for form dropdown
+  const [formData, setFormData] = useState({ name: '', size: '' }); // Controlled Components (form inputs bound to state)
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [targetItem, setTargetItem] = useState(null);
 
-  useEffect(() => {
+  useEffect(() => { // useEffect Hook
     // Simulate loading data
     setTimeout(() => {
-      setData(bronzeData);
-      // Extract unique bronze frame names for dropdown
-      const uniqueNames = [...new Set(bronzeData.map(item => item.name))];
+      setData(bronzeData); // Working with APIs (here from static JSON, simulating API call)
+      const uniqueNames = [...new Set(bronzeData.map(item => item.name))]; // Lists
       setBronzeFrameOptions(uniqueNames);
       setLoading(false);
     }, 500);
   }, []);
 
-  const customStyles = {
-    header: {
-      style: {
-        fontSize: '20px',  // header font size
-        fontWeight: 'bold',
-      },
-    },
-    headRow: {
-      style: {
-        fontSize: '18px',  // header row font size
-      },
-    },
-    rows: {
-      style: {
-        fontSize: '18px',  // body rows font size
-      },
-    },
-    cells: {
-      style: {
-        fontSize: '18px',  // cell font size (can also set padding here)
-      },
-    },
-  };  
-
-  const columns = [
-    {
-      name: 'Shape',
-      selector: row => row.name,
-      sortable: true,
-    },
-    {
-      name: 'Size',
-      selector: row => row.size,
-      sortable: true,
-    },
-    {
-      name: 'Actions',
-      cell: row => (
-        <>
-          <FaEdit
-            className="text-primary me-2"
-            title="Edit"
-            role="button"
-            onClick={() => openEditModal(row)}
-          />
-          <FaTrashAlt
-            className="text-danger me-2"
-            title="Delete"
-            role="button"
-            onClick={() => confirmDelete(row)}
-          />
-          <FaTimesCircle
-            className="text-danger"
-            title="Change Status"
-            role="button"
-            onClick={() => alert(`Status changed for: ${row.name}`)}
-          />
-        </>
-      ),
-    },
-  ];
-
   const openAddModal = () => {
-    setSelectedItem(null);
-    setFormData({ name: '', size: '' });
+    setSelectedItem(null); // Event Handling
+    setFormData({ name: '', size: '' }); // Event Handling + useState
     setShowModal(true);
   };
 
   const openEditModal = item => {
     setSelectedItem(item);
-    setFormData({ name: item.name, size: item.size.toString() });
+    setFormData({ name: item.name, size: item.size.toString() }); // Props (indirect usage of item)
     setShowModal(true);
   };
 
-  const handleSave = () => {
+  const handleSave = () => { // Event Handling
     if (!formData.name || formData.name === '-1' || !formData.size.trim()) {
       alert('Please select a Bronze Frame and enter Size.');
       return;
@@ -113,7 +53,7 @@ function BronzeFrameSizes() {
         prevData.map(item =>
           item.id === selectedItem.id ? { ...item, name: formData.name, size: formData.size } : item
         )
-      );
+      ); // Conditional Rendering (inside `if`)
     } else {
       const newItem = {
         id: data.length ? Math.max(...data.map(d => d.id)) + 1 : 1,
@@ -136,7 +76,7 @@ function BronzeFrameSizes() {
   };
 
   if (loading) {
-    return <LoadingSpinner />;
+    return <LoadingSpinner />; // Conditional Rendering
   }
 
   return (
@@ -158,12 +98,12 @@ function BronzeFrameSizes() {
           dense
           defaultSortFieldId={1}
           customStyles={customStyles}
-        />
+        /> {/* Lists and Keys (data displayed in list/table) */}
 
         {/* Add/Edit Modal */}
         <Modal show={showModal} onHide={() => setShowModal(false)} centered>
           <Modal.Header closeButton>
-            <Modal.Title>{selectedItem ? 'Edit' : 'Add'} Bronze Frame Size</Modal.Title>
+            <Modal.Title>{selectedItem ? 'Edit' : 'Add'} Bronze Frame Size</Modal.Title> {/* Conditional Rendering */}
           </Modal.Header>
           <Modal.Body>
             <Form>
@@ -171,23 +111,20 @@ function BronzeFrameSizes() {
                 <Form.Label>Bronze Frame<span className="text-danger">*</span></Form.Label>
                 <Form.Select
                   value={formData.name}
-                  onChange={e => setFormData({ ...formData, name: e.target.value })}
+                  onChange={e => setFormData({ ...formData, name: e.target.value })} // Controlled Components
                 >
                   <option value="-1">-- Select Bronze Frame --</option>
                   {bronzeFrameOptions.map((option, idx) => (
                     <option key={idx} value={option}>
                       {option}
                     </option>
-                  ))}
+                  ))} {/* Lists and Keys */}
                 </Form.Select>
               </Form.Group>
               <Form.Group className="mb-3">
                 <Form.Label>Size<span className="text-danger">*</span></Form.Label>
-                <Form.Control
-                  type="text"
-                  maxLength="100"
-                  value={formData.size}
-                  onChange={e => setFormData({ ...formData, size: e.target.value })}
+                <Form.Control type="text" maxLength="100" value={formData.size}
+                  onChange={e => setFormData({ ...formData, size: e.target.value })} // Controlled Components
                 />
               </Form.Group>
             </Form>
@@ -208,7 +145,7 @@ function BronzeFrameSizes() {
             <Modal.Title>Confirm Delete</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            Are you sure you want to delete <strong>{targetItem?.name}</strong>?
+            Are you sure you want to delete <strong>{targetItem?.name}</strong>? {/* Conditional Rendering */}
           </Modal.Body>
           <Modal.Footer>
             <Button variant="danger" onClick={handleDeleteConfirmed}>
