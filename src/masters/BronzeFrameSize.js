@@ -30,6 +30,53 @@ function BronzeFrameSizes() { // JSX Syntax, Function Components
     }, 500);
   }, []);
 
+  const customStyles = {
+    header: {
+      style: {
+        fontSize: '20px',  // header font size
+        fontWeight: 'bold',
+      },
+    },
+    headRow: {
+      style: {
+        fontSize: '18px',  // header row font size
+      },
+    },
+    rows: {
+      style: {
+        fontSize: '18px',  // body rows font size
+      },
+    },
+    cells: {
+      style: {
+        fontSize: '18px',  // cell font size (can also set padding here)
+      },
+    },
+  };  
+
+  const columns = [
+    {
+      name: 'Shape',
+      selector: row => row.name,
+      sortable: true,
+    },
+    {
+      name: 'Size',
+      selector: row => row.size,
+      sortable: true,
+    },
+    {
+      name: 'Actions',
+      cell: row => (
+        <>
+          <FaEdit className="text-primary me-2" title="Edit" role="button" onClick={() => openEditModal(row)} />
+          <FaTrashAlt className="text-danger me-2" title="Delete" role="button" onClick={() => confirmDelete(row)} />
+          <FaTimesCircle className="text-danger" title="Change Status" role="button" onClick={() => alert(`Status changed for: ${row.name}`)} />
+        </>
+      ),
+    },
+  ];
+
   const openAddModal = () => {
     setSelectedItem(null); // Event Handling
     setFormData({ name: '', size: '' }); // Event Handling + useState
