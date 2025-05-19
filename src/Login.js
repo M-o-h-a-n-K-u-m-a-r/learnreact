@@ -1,7 +1,9 @@
-import React, { useState, useRef , useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Form, Button, Alert } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+import credentials from './JSON/LoginCredentials.json';
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -9,13 +11,16 @@ function Login() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  // Create a ref for the username input
   const usernameRef = useRef(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (username === 'kishore' && password === 'msd7') {
+    const userExists = credentials.find(
+      (user) => user.username === username && user.password === password
+    );
+
+    if (userExists) {
       navigate('/dashboard');
     } else {
       setError('Invalid username or password');
@@ -27,14 +32,13 @@ function Login() {
       const timer = setTimeout(() => {
         setError('');
       }, 3000);
-      return () => clearTimeout(timer); // Cleanup on component unmount or error change
+      return () => clearTimeout(timer);
     }
   }, [error]);
 
   const handleClear = () => {
     setUsername('');
     setPassword('');
-    // Focus the username input after clearing
     if (usernameRef.current) {
       usernameRef.current.focus();
     }
@@ -47,7 +51,7 @@ function Login() {
         <Form.Group controlId="formUsername" className="mb-3">
           <Form.Label><b>Username</b></Form.Label>
           <Form.Control
-            ref={usernameRef} // Attach the ref to the username input
+            ref={usernameRef}
             type="text"
             placeholder="Enter username"
             value={username}

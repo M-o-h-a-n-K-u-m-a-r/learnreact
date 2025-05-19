@@ -24,28 +24,36 @@ function ProductionProcessStatus() {
   }, []);
 
   const customStyles = {
-    header: {
-      style: {
-        fontSize: '20px',  // header font size
-        fontWeight: 'bold',
-      },
+  headRow: {
+    style: {
+      fontSize: '20px',
+      fontWeight: 'bold',
+      border: '1px solid #dee2e6',
+      backgroundColor: '#f8f9fa',
     },
-    headRow: {
-      style: {
-        fontSize: '18px',  // header row font size
-      },
+  },
+  headCells: {
+    style: {
+      fontSize: '18px',
+      fontWeight: 'bold',
+      borderRight: '1px solid #dee2e6',
     },
-    rows: {
-      style: {
-        fontSize: '18px',  // body rows font size
-      },
+  },
+  rows: {
+    style: {
+      fontSize: '16px',
+      border: '1px solid #dee2e6',
     },
-    cells: {
-      style: {
-        fontSize: '18px',  // cell font size (can also set padding here)
-      },
+  },
+  cells: {
+    style: {
+      borderRight: '1px solid #dee2e6',
+      padding: '12px 16px',
     },
-  };  
+  },
+};
+
+
 
   const columns = [
     {
@@ -145,23 +153,26 @@ function ProductionProcessStatus() {
 
   return (
     <>
+    <div style={{ backgroundColor: '#fffbe6', minHeight: '100vh' }}>
       <AppNavbar />
-      <div className="container mt-4">
+      <div className="container mt-4 mb-5">
+
         <div className="d-flex justify-content-between align-items-center mb-3">
           <h2>Production Process Status</h2>
           <Button variant="primary" onClick={openAddModal}>
             Add Production Process Status
           </Button>
         </div>
-        <DataTable
-          columns={columns}
-          data={data}
-          pagination
-          highlightOnHover
-          dense
-          defaultSortFieldId={1}
-          customStyles={customStyles}
-        />
+        
+          <DataTable
+            columns={columns}
+            data={data}
+            pagination
+            highlightOnHover
+            dense
+            defaultSortFieldId={1}
+            customStyles={customStyles}
+          />
 
         {/* Add/Edit Modal */}
         <Modal show={showModal} onHide={() => setShowModal(false)} centered>
@@ -190,12 +201,13 @@ function ProductionProcessStatus() {
           </Modal.Body>
           <Modal.Footer>
             <Button variant="success" onClick={handleSave}>
-              Save
+              <FaEdit className="me-2" /> Save
             </Button>
-            <Button variant="secondary" onClick={() => setShowModal(false)}>
-              Close
+            <Button variant="outline-secondary" onClick={() => setShowModal(false)}>
+              Cancel
             </Button>
           </Modal.Footer>
+
         </Modal>
 
         {/* Delete Confirmation Modal */}
@@ -215,6 +227,7 @@ function ProductionProcessStatus() {
             </Button>
           </Modal.Footer>
         </Modal>
+      </div>
       </div>
     </>
   );
