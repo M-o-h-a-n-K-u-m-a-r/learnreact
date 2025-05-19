@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "name": "Oval",
+    "size": "2.36x3.15"
+  },
+  {
+    "id": 2,
+    "name": "Oval",
+    "size": "2.76x3.54"
+  },
+  {
+    "id": 3,
+    "name": "Oval",
+    "size": "3.15x3.94"
+  },
+  {
+    "id": 4,
+    "name": "Oval",
+    "size": "3.54x4.72"
+  },
+  {
+    "id": 5,
+    "name": "Oval",
+    "size": "4.33x5.91"
+  },
+  {
+    "id": 6,
+    "name": "Oval",
+    "size": "5.12x7.09"
+  },
+  {
+    "id": 7,
+    "name": "Oval",
+    "size": "7.09x9.45"
+  },
+  {
+    "id": 8,
+    "name": "Rectangle",
+    "size": "2.76x3.54"
+  },
+  {
+    "id": 9,
+    "name": "Rectangle",
+    "size": "3.15x3.94"
+  },
+  {
+    "id": 10,
+    "name": "Rectangle",
+    "size": "3.54x4.72"
+  },
+  {
+    "id": 11,
+    "name": "Rectangle",
+    "size": "4.33x5.91"
+  },
+  {
+    "id": 12,
+    "name": "Rectangle",
+    "size": "5.12x7.09"
+  },
+  {
+    "id": 13,
+    "name": "Rectangle",
+    "size": "7.09x9.45"
+  },
+  {
+    "id": 14,
+    "name": "Circle",
+    "size": "3.94x3.94"
+  }
+]
