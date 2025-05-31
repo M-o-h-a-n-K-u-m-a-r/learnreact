@@ -23,7 +23,7 @@ function Login() {
     if (userExists) {
       navigate('/dashboard');
     } else {
-      setError('Invalid username or password');
+      setError('Invalid Username or Password');
     }
   };
 
@@ -71,8 +71,6 @@ function Login() {
           />
         </Form.Group>
 
-        {error && <Alert variant="danger">{error}</Alert>}
-
         <div className="d-grid">
           <Button variant="info" type="submit">
             Login
@@ -84,6 +82,9 @@ function Login() {
             Clear
           </Button>
         </div>
+        <br></br>
+        {error && <Alert variant="danger">{error}</Alert>}
+
       </Form>
     </Container>
   );

@@ -5,6 +5,7 @@ import Dashboard from './masters/Dashboard.js';
 import Login from './Login.js';
 import BOL from './BOL.js';
 import BronzeFrameSize from './masters/BronzeFrameSize.js';
+import AddBronzeFrameSize from './masters/AddBronzeFrameSize.js';
 import ProductionProcessStatus from './masters/ProductionProcessStatus.js';
 import Customer from './masters/Customer.js';
 import Admin from './Admin.js';
@@ -14,7 +15,8 @@ import Orders from './masters/Orders.js';
 import 'react-bootstrap';
 
 
-function App() {
+function App() 
+{
   return (
     <Router>
       <Routes>
@@ -22,6 +24,12 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/BOL" element={<BOL />} />
         <Route path="/BronzeFrameSize" element={<BronzeFrameSize />} />
+
+        {/* AddBronzeFrameSize routes */}
+        <Route path="/addbronzeframesize" element={<AddBronzeFrameSize />} />
+        {/* Edit route for Bronze Frame Size */}
+        <Route path="/edit/:id" element={<AddBronzeFrameSize />} />
+
         <Route path="/ProductionProcessStatus" element={<ProductionProcessStatus />} />
         <Route path="/Customer" element={<Customer />} />
         <Route path="/Inventory" element={<Inventory />} />
@@ -36,4 +44,3 @@ function App() {
 }
 
 export default App;
-
